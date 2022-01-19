@@ -16,6 +16,12 @@
     flex-direction: row;
 }
 
+.lnc{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .lve-info{
     width: 25%;

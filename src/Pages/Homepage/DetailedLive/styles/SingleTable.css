@@ -26,7 +26,8 @@
 }
 
 .out-style{
-  font-size: 0.7rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.3px;
   font-weight:400;
   color: rgba(255, 255, 255, 0.473);
 }

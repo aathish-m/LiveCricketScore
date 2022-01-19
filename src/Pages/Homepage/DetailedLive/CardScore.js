@@ -8,7 +8,7 @@ function CardScore({live}) {
 
     
     return (
-        <div className={option ? "card-hero orange-signal" : "card-hero green-signal"}>
+        <div className={option ? "card-hero orange-signal cdh" : "card-hero  green-signal"}>
             <div className="card-top">
                 <div className="type">
                     <p className="EtTx">{live.EtTx} - {live.ErnInf}</p>

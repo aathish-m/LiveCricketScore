@@ -10,6 +10,8 @@ import FOW from './FOW'
 import TeamDetails from './TeamDetails'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
+import PropagateLoader from 'react-spinners/PropagateLoader'
+
 
 
 function DetailedLivescore() {
@@ -36,6 +38,15 @@ function DetailedLivescore() {
             console.error(error);
         });
     },[1])
+
+    const [loading,setLoading] = useState(false)
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        },5000)
+    },[1])
     
     return (
         <div className="lve">
@@ -43,29 +54,36 @@ function DetailedLivescore() {
                 <Navigation/>
             </div>
                 
-            <div className="lve-nxt">
-                <div className="lve-info">
-                    {
-                        live && <Info live={live}/>
-                    }
-                    
-                </div>
-
-                <div className="lve-scoreboard">
-                    { 
-                        
-                            live && <Scoreboard live={live} params={params.Eid}/>
-                        
-                    }
-                    
-                </div>
-
-                <div className="lve-team">
+            <div className={loading ? "lve-nxt lnc" : "lve-nxt"}>
                 {
-                    
-                        (live&&live.Prns&&live.T1&&live.T2) && <TeamDetails live={live} players={live.Prns} team1={live.T1} team2={live.T2}/>
+                    loading ?  
+                    <PropagateLoader color={'#F1F5F4'} loading={loading} size={16} />
+                    :
+                    <div className='lve-nxt'>
+                        <div className="lve-info">
+                            {
+                                live && <Info live={live}/>
+                            }
+                            
+                        </div>
+
+                        <div className="lve-scoreboard">
+                            { 
+                                
+                                    live && <Scoreboard live={live} params={params.Eid}/>
+                                
+                            }
+                            
+                        </div>
+
+                        <div className="lve-team">
+                        {
+                            
+                                (live&&live.Prns&&live.T1&&live.T2) && <TeamDetails live={live} players={live.Prns} team1={live.T1} team2={live.T2}/>
+                        }
+                        </div>
+                    </div>
                 }
-                </div>
             </div>
             
         </div>

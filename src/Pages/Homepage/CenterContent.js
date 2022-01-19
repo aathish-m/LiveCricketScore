@@ -3,10 +3,13 @@ import './styles/CenterContent.css'
 import moment from "moment"
 import LiveScore from "./LivePart/Livescore"
 import axios from 'axios'
+import PropagateLoader from 'react-spinners/PropagateLoader'
+
 
 function CenterContent() {
     const todaydate = moment().format('yyyyMMDD')
     const[stages,setStages] = useState([])
+    
 
 
     const datem2 = moment().subtract(2,'days').format('ddd MMM Do')
@@ -55,21 +58,38 @@ function CenterContent() {
         });
     },[choosendate])
 
+    const [loading,setLoading] = useState(false)
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        },3000)
+    },[choosendate])
 
     return (
         <div className="stagecard">
-            <div className='dates'>
-                {dates.map((date,index) => (
-                    <div className={(choosendate == date) ? 'd1 cl' : 'd1'} onClick={() => (setChoosendate(date))}>
-                        <p>{recentdates[date]}</p>
+                
+                <div>
+                    <div className='dates'>
+                        {dates.map((date,index) => (
+                            <div className={(choosendate == date) ? 'd1 cl' : 'd1'} onClick={() => (setChoosendate(date))}>
+                                <p className='prc'>{recentdates[date]}</p>
+                            </div>
+                        ))}
                     </div>
-                ))}
-            </div>
-            {
-              stages && stages.map((stage,index) => (
-                  <LiveScore key={index} stage={stage}/>
-              ))
-            }
+                    <div className={loading && "cns"}>
+                    {
+                        loading ?
+                        <PropagateLoader color={'#F1F5F4'} loading={loading} size={15} />
+                        :
+                        stages && stages.map((stage,index) => (
+                        <LiveScore key={index} stage={stage}/>
+                        ))
+                    }
+                    </div>
+                </div>
+
             {/* <LiveScore/> */}
         </div>
     )

@@ -3,6 +3,14 @@
     height: 100%;
 }
 
+.cns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60vh;
+}
+
 
 .dates{
     width: 100%;
@@ -34,6 +42,9 @@
 
 @media all and (max-width:500px){
     .dates{
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+    }
+    .prc{
+        width: 60px;
     }
 }
